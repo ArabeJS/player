@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="RDapp" ng-controller="RDapp" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>RDTV</title>
+    <style>
+    body,html{ width: 100%; height: 100%; padding: 0px; margin:0px; position: fixed;background-color: #000; }
+    #player { width: 100%; height: 100%; position: fixed; }
+    </style>
+  </head>
+  <body layout="column">
+    <div id="player"></div>
+
+    <script >
+        var url = new URL(window.location.href);//alert(url)
+        var cmd = atob(url.searchParams.get("c"));alert(c)
+
+        var wjs = require("wcjs-player");
+
+        var player = new wjs("#player").addPlayer({
+          autoplay: true,
+          wcjs: require('wcjs-prebuilt')
+        });
+
+        player.addPlaylist(c);
+        player.onError(function(error) {
+            alert(error)
+          });
+    </script>
+  </body>
+</html>
